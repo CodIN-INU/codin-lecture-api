@@ -35,6 +35,13 @@ public class LikeController {
                 .body(new SingleResponse<>(201, "좋아요가 " + message.getDescription() + "되었습니다.", message.toString()));
     }
 
+    /**
+     * Retrieves the total number of likes for a specified entity type and ID.
+     *
+     * @param likeType the type of entity to count likes for
+     * @param id the unique identifier of the entity
+     * @return the total like count for the specified entity
+     */
     @Hidden
     @GetMapping
     public Integer getLikeCount(
@@ -43,6 +50,13 @@ public class LikeController {
         return likeFeignClient.getLikeCount(likeType, id);
     }
 
+    /**
+     * Determines whether the current user has liked the specified entity.
+     *
+     * @param likeType the type of entity to check (e.g., lecture, review)
+     * @param id the unique identifier of the entity
+     * @return {@code true} if the user has liked the entity; {@code false} otherwise
+     */
     @Hidden
     @GetMapping("/user")
     public Boolean isUserLiked(

@@ -7,6 +7,11 @@ import lombok.Getter;
 public class ReviewException extends GlobalException {
     private final ReviewErrorCode errorCode;
 
+    /**
+     * Constructs a new ReviewException with the specified review error code.
+     *
+     * @param errorCode the specific error code representing the review-related error
+     */
     public ReviewException(ReviewErrorCode errorCode) {
         super(errorCode);
         this.errorCode = errorCode;

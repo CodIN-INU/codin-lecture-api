@@ -26,6 +26,16 @@ public class LectureController {
 
     private final LectureService lectureService;
 
+    /**
+     * Returns a paginated list of lectures filtered and sorted by department, keyword, sorting option, and like status.
+     *
+     * @param department the department to filter lectures by, or null for all departments
+     * @param keyword an optional search keyword for lecture or professor names
+     * @param sort the sorting option to order the lectures
+     * @param like if true, returns only lectures liked by the user
+     * @param page the page number to retrieve
+     * @return a response containing a page of lectures matching the specified filters and sorting
+     */
     @Operation(
             summary = "학과명 및 과목/교수 정렬 페이지",
             description = "학과명과 검색 키워드(optional), 과목/교수 라디오 토클을 통해 정렬한 리스트 10개씩 반환<br>"+
@@ -46,6 +56,12 @@ public class LectureController {
                         lectureService.sortListOfLectures(keyword, department, sort, like, page)));
     }
 
+    /**
+     * Retrieves detailed information for a specific lecture.
+     *
+     * @param lectureId the unique identifier of the lecture
+     * @return a response containing the lecture's detailed information
+     */
     @Operation(
             summary = "과목 상세 정보 반환",
             description = "Preview를 눌렀을 때 뜨는 과목 정보 반환"
@@ -56,6 +72,14 @@ public class LectureController {
                 .body(new SingleResponse<>(200, "강의 별점 정보 반환", lectureService.getLectureDetails(lectureId)));
     }
 
+    /**
+     * Retrieves a list of lectures filtered by department, grade, or semester for review writing.
+     *
+     * @param department the department to filter lectures by, or null to include all departments
+     * @param grade the grade level to filter lectures by (1-4), or null to include all grades
+     * @param semester the semester to filter lectures by, or null to include all semesters
+     * @return a response containing the filtered list of lectures suitable for review
+     */
     @Operation(
             summary = "학과, 학년, 수강학기 로 강의 검색",
             description = "수강 후기 작성 시 필요한 검색엔진<br>" +

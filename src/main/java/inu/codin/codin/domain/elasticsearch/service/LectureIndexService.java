@@ -21,9 +21,9 @@ public class LectureIndexService {
     // BeforeConvertCallback, AfterSaveCallback, AfterDeleteCallback...
 
     /**
-     * 강의 저장 / 수정 후 호출
-     * ApplicationEventPublisher -> LectureSavedEvent
-     * @param event LectureSavedEvent
+     * Handles a lecture save or update event by synchronizing the corresponding lecture data with the Elasticsearch index.
+     *
+     * @param event the event containing the saved or updated lecture entity
      */
     @TransactionalEventListener(classes = {LectureSavedEvent.class})
     public void handleLectureSaved(LectureSavedEvent event) {
@@ -32,9 +32,9 @@ public class LectureIndexService {
     }
 
     /**
-     * 강의 삭제 시 호출
-     * ApplicationEventPublisher -> LectureDeletedEvent
-     * @param event LectureDeletedEvent
+     * Handles the deletion of a lecture by removing its corresponding document from the Elasticsearch index.
+     *
+     * @param event the event containing the ID of the deleted lecture
      */
     @TransactionalEventListener(classes = {LectureDeletedEvent.class})
     public void handleLectureDeleted(LectureDeletedEvent event) {

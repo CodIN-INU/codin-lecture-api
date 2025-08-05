@@ -22,6 +22,11 @@ public class LectureRoomController {
 
     private final LectureRoomService lectureRoomService;
 
+    /****
+     * Handles GET requests to retrieve the current day's lecture room status by floor.
+     *
+     * @return a ResponseEntity containing a SingleResponse with a list of maps, where each map associates a floor number with a list of lecture room status details for that floor.
+     */
     @Operation(
             summary = "오늘의 강의 현황",
             description = "당일의 요일에 따라 층마다 호실에서의 수업 내용 반환"

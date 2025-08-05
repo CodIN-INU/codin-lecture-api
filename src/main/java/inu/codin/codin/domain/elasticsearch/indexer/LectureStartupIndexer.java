@@ -33,6 +33,13 @@ public class LectureStartupIndexer {
     @Value("${elasticsearch.indexer.enabled:true}")
     private boolean indexerEnabled;
 
+    /****
+     * Indexes all lecture data into Elasticsearch upon application startup if enabled.
+     *
+     * This method listens for the application ready event and, if the indexer is enabled via configuration,
+     * deletes any existing lecture documents in the Elasticsearch index and reindexes all lectures from the database
+     * in batches. Each lecture is converted to a document and saved to Elasticsearch. Progress and results are logged.
+     */
     @EventListener(ApplicationReadyEvent.class)
     @Transactional(readOnly = true)
     public void onApplicationEvent(ApplicationReadyEvent event) {

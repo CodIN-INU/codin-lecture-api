@@ -30,14 +30,17 @@ public class LectureElasticService {
     private final ElasticsearchOperations elasticsearchOperations;
 
     /**
-     * ElasticSearch 강의 검색 메서드
-     * @param keyword    키워드 (풀텍스트 검색)
-     * @param department 학과 필터 (null 가능)
-     * @param sortOption 정렬 옵션 (별점, 좋아요, 조회수)
-     * @param likedIds   사용자가 좋아요 누른 강의 ID 목록 (null 또는 empty 시 무시)
-     * @param pageNumber 0-based 페이지 번호
-     * @param size       페이지 사이즈
-     * @return Page<Long>
+     * Searches for lecture document IDs in Elasticsearch using full-text search, optional department and liked lecture filters, and sorting.
+     *
+     * Performs a multi-field full-text search on lecture documents based on the provided keyword, with optional filtering by department and a list of liked lecture IDs. Results are sorted according to the specified sorting option (rating, likes, or hits), and paginated.
+     *
+     * @param keyword    The search keyword for full-text matching. If blank or null, all lectures are matched.
+     * @param department Optional filter to restrict results to a specific department.
+     * @param sortOption Sorting criteria: rating, likes, or hits. If null, defaults to rating.
+     * @param likedIds   Optional list of lecture IDs to filter results to those liked by the user.
+     * @param pageNumber Zero-based index of the results page to retrieve.
+     * @param size       Number of results per page.
+     * @return A paginated list of lecture IDs matching the search and filter criteria.
      */
     public Page<Long> searchIds(
             String keyword,
@@ -109,6 +112,16 @@ public class LectureElasticService {
                 hits.getTotalHits());
     }
 
+    /**
+     * Returns the Elasticsearch sort option corresponding to the specified sorting criterion.
+     *
+     * If the sorting option is null or set to RATING, sorts by descending star rating.
+     * If set to LIKE, sorts by descending number of likes.
+     * If set to HIT, sorts by descending number of hits.
+     *
+     * @param sortOption the sorting criterion to apply
+     * @return the Elasticsearch sort option for the given criterion
+     */
     private SortOptions getSortOption(SortingOption sortOption) {
         if (sortOption == null) {
             return SortOptions.of(o -> o.field(f -> f.field("starRating").order(SortOrder.Desc)));

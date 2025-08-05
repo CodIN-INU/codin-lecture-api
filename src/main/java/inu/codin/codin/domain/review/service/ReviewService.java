@@ -50,9 +50,12 @@ public class ReviewService {
     private final ApplicationEventPublisher publisher;
 
     /**
-     * 새로운 강의 후기 작성
-     * @param lectureId 후기를 작성하는 강의의 pk
-     * @param createReviewRequestDto 후기 작성 시 포함되는 내용
+     * Creates a new review for a lecture, updating related statistics and publishing a summarization event.
+     *
+     * Validates the star rating and semester, ensures the user has not already reviewed the lecture, saves the new review, updates the lecture's average rating and user review statistics, and publishes a summarization event for the lecture.
+     *
+     * @param lectureId the ID of the lecture to review
+     * @param createReviewRequestDto the review details provided by the user
      */
     @Transactional
     public void createReview(Long lectureId, CreateReviewRequestDto createReviewRequestDto) {
@@ -90,10 +93,10 @@ public class ReviewService {
     }
 
     /**
-     * 강의 후기 작성 시 해당 강의의 Rating 업데이트
+     * Updates the lecture's average star rating and associated emotion after a new review is added.
      *
-     * @param lecture 강의 엔티티
-     * @param starRating 별점
+     * @param lecture   the lecture entity to update
+     * @param starRating the star rating from the new review
      */
     public void updateRating(Lecture lecture, @NotNull @Digits(integer = 1, fraction = 2) double starRating){
         double avgOfStarRating = reviewRepository.getAvgOfStarRatingByLecture(lecture);

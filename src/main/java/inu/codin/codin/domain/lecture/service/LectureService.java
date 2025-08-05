@@ -40,14 +40,15 @@ public class LectureService {
     private final UserReviewStatsService userReviewStatsService;
     private final LikeService likeService;
 
-    /**
-     * 여러 옵션을 선택하여 강의 리스트 반환
-     * @param keyword 검색 키워드
-     * @param department Department(COMPUTER_SCI, INFO_COMM, EMBEDDED), null 시에 전체 검색
-     * @param sortingOption 정확도 순, 평점 많은 순, 좋아요 많은 순, 조회수 순 중 내림차순 선택
-     * @param like 좋아요 목록 토글
-     * @param page 페이지 번호
-     * @return LecturePageResponse
+    /****
+     * Returns a paginated list of lectures filtered and sorted by keyword, department, sorting option, and liked status.
+     *
+     * @param keyword        the search keyword to filter lectures
+     * @param department     the department to filter by, or null to include all departments
+     * @param sortingOption  the sorting criteria (e.g., relevance, rating count, likes, views)
+     * @param like           if true, filters to lectures liked by the current user
+     * @param page           the page number to retrieve
+     * @return a paginated response containing lecture previews and pagination details
      */
     public LecturePageResponse sortListOfLectures(String keyword, Department department, SortingOption sortingOption, Boolean like, int page) {
         // 조회 유저의 좋아요 목록을 조회해 반환
@@ -77,7 +78,10 @@ public class LectureService {
     }
 
     /**
-     * 페이지로 반환된 LectureEntity -> Dto 변환
+     * Converts a paginated list of Lecture entities into a LecturePageResponse DTO, including like status for each lecture.
+     *
+     * @param lecturePage the paginated Lecture entities to convert
+     * @return a LecturePageResponse containing lecture previews, total pages, and the next page number
      */
     private LecturePageResponse getLecturePageResponse(Page<Lecture> lecturePage) {
         return LecturePageResponse.of(lecturePage.stream()
@@ -96,11 +100,13 @@ public class LectureService {
     }
 
     /**
-     * 강의 후기를 작성할 강의 목록 검색
-     * @param department Department (COMPUTER_SCI, INFO_COMM, EMBEDDED)
-     * @param grade 학년 (1,2,3,4)
-     * @param semester 수강 학기 (23-1, 23-2,,, 현재 학기)
-     * @return List<LectureSearchListResponseDto> 검색 결과 리스트 반환
+     * Searches for lectures eligible for review writing based on department, grade, and semester.
+     *
+     * @param department the department to filter lectures by, or null for all departments
+     * @param grade the student grade to filter lectures by
+     * @param semester the semester string (e.g., "23-1"); if null, searches across all semesters
+     * @return a list of lectures matching the criteria, formatted for review writing
+     * @throws SemesterException if the specified semester does not exist
      */
     public List<LectureSearchListResponseDto> searchLecturesToReview(Department department, Integer grade, String semester) {
         Semester semesterEntity = (semester != null) ? semesterService.getSemester(semester).orElseThrow(() -> new SemesterException(SemesterErrorCode.SEMESTER_NOT_FOUND)) : null;

@@ -79,10 +79,20 @@ public class Lecture {
         this.emotion = emotion;
     }
 
+    /**
+     * Sets or updates the emotion associated with this lecture.
+     *
+     * @param emotion the Emotion entity representing the lecture's rating distribution
+     */
     public void assignEmotion(Emotion emotion) {
         this.emotion = emotion;
     }
 
+    /**
+     * Updates the AI-generated summary for the lecture.
+     *
+     * @param aiSummary the new AI-generated summary text to set
+     */
     public void updateAiSummary(String aiSummary) {
         this.aiSummary = aiSummary;
     }

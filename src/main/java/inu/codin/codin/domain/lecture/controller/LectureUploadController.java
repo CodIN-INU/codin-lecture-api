@@ -23,6 +23,15 @@ public class LectureUploadController {
 
     private final LectureUploadService lectureUploadService;
 
+    /**
+     * Handles uploading a new semester's lecture data via an Excel file.
+     *
+     * Expects the uploaded file to be named in the format "year-semester" (e.g., "24-1.xlsx").
+     * Only users with the roles ADMIN or MANAGER are authorized to access this endpoint.
+     *
+     * @param file the Excel file containing lecture data for the new semester
+     * @return a response indicating successful upload and the name of the uploaded file
+     */
     @Operation(
             summary = "새 학기의 강의 내역 엑셀파일 업로드",
             description = "강의 내역서(엑셀 파일) 이름을 '년도-학기'로 설정하여 업로드 ex) 24-1.xlsx, 24-2.xlsx"
@@ -36,6 +45,15 @@ public class LectureUploadController {
 
     }
 
+    /**
+     * Handles uploading an Excel file to update lecture room status for a new semester.
+     *
+     * Expects a multipart file named "excelFile" with the file name formatted as "year-semester" (e.g., "24-1.xlsx").
+     * Only users with the roles ADMIN or MANAGER are authorized to access this endpoint.
+     *
+     * @param file the uploaded Excel file containing lecture room data
+     * @return a response indicating successful update of lecture room status with the uploaded file name
+     */
     @Operation(
             summary = "강의실 현황 엑셀파일 업데이트",
             description = "강의 내역서(엑셀 파일) 이름을 '년도-학기'로 설정하여 업로드 ex) 24-1.xlsx, 24-2.xlsx"

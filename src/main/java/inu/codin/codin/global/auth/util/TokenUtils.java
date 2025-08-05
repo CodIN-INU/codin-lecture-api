@@ -12,7 +12,14 @@ import org.springframework.util.StringUtils;
 public class TokenUtils {
 
     /**
-     * 쿠키 또는 Authorization 헤더에서 Access Token 추출
+     * Extracts an access token from the given HTTP request.
+     *
+     * This method first attempts to retrieve a Bearer token from the "Authorization" header.
+     * If not found or improperly formatted, it then searches for a cookie named "x-access-token".
+     * Returns the extracted token if present and non-empty; otherwise, returns {@code null}.
+     *
+     * @param request the HTTP request from which to extract the access token
+     * @return the extracted access token, or {@code null} if none is found
      */
     public static String extractToken(HttpServletRequest request) {
         String bearerToken = null;

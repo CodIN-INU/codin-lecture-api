@@ -26,6 +26,16 @@ public class LectureSummarizationService {
     private final OpenAiChatModel chatModel;
     private final LectureRepository lectureRepository;
 
+    /**
+     * Generates and saves an AI-based summary for the specified lecture using its metadata, tags, and reviews.
+     *
+     * Retrieves the lecture by ID, validates the presence and content of reviews, constructs a prompt with lecture details,
+     * and requests a summary from the AI chat model. If successful, updates the lecture with the generated summary.
+     * Skips summarization if there are no reviews or valid review content. Throws a {@code LectureException} if the lecture
+     * is not found or if AI summary generation fails.
+     *
+     * @param lectureId the ID of the lecture to summarize
+     */
     @Transactional
     public void summarizeLecture(Long lectureId) {
         Lecture lecture = lectureRepository.findLectureWithTagsAndReviewsById(lectureId)
@@ -77,6 +87,14 @@ public class LectureSummarizationService {
         }
     }
 
+    /**
+     * Constructs a formatted prompt string containing lecture details, tags, syllabus, and reviews for AI-based summarization.
+     *
+     * @param lecture the lecture entity containing metadata and syllabus information
+     * @param reviews concatenated review content for the lecture
+     * @param tags comma-separated lecture tags
+     * @return a multi-line prompt instructing the AI to summarize the lecture in a Q&A format within 700 characters
+     */
     private String buildPrompt(Lecture lecture, String reviews, String tags) {
         return """
             아래 정보를 토대로 “질문: 답변” 형태로 총 700자 이내로 요약해 주세요.

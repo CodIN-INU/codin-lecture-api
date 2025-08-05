@@ -8,5 +8,11 @@ import java.util.Optional;
 
 @Repository
 public interface UserReviewStatsRepository extends JpaRepository<UserReviewStats, Long> {
-    Optional<UserReviewStats> findByUserId(String userId);
+    /**
+ * Retrieves the user review statistics associated with the specified user ID.
+ *
+ * @param userId the unique identifier of the user
+ * @return an Optional containing the UserReviewStats if found, or an empty Optional if not present
+ */
+Optional<UserReviewStats> findByUserId(String userId);
 }

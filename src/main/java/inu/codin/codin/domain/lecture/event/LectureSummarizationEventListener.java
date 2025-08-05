@@ -15,7 +15,13 @@ public class LectureSummarizationEventListener {
 
     private final LectureSummarizationService summarizationService;
 
-    // todo: 현재 리뷰 작성 시에서만 작동, Lecture 엔티티에 생성 필요.
+    /**
+     * Handles lecture summarization events asynchronously after a transaction commits.
+     *
+     * Initiates AI-based summarization for the lecture specified in the event. If an error occurs during summarization, it is logged.
+     *
+     * @param event the event containing the lecture ID to be summarized
+     */
 
     @Async("aiSummaryExecutor")
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)

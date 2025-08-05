@@ -19,6 +19,16 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    /**
+     * Creates a new review for the specified lecture.
+     *
+     * Handles POST requests to create a review associated with a given lecture ID using the provided review data.
+     * Returns a response indicating successful creation without a response body payload.
+     *
+     * @param lectureId the ID of the lecture to associate the review with
+     * @param createReviewRequestDto the review creation request data
+     * @return HTTP 201 Created response with a completion message and no data payload
+     */
     @Operation(
             summary = "수강 후기 작성"
     )
@@ -31,6 +41,13 @@ public class ReviewController {
                 .body(new SingleResponse<>(201, "수강 후기 작성 완료", null));
     }
 
+    /**
+     * Retrieves a paginated list of reviews for the specified lecture.
+     *
+     * @param lectureId the ID of the lecture for which to fetch reviews
+     * @param page the page number to retrieve
+     * @return a response entity containing a standardized response with the list of reviews
+     */
     @Operation(
             summary = "해당 강의의 수강 후기 반환"
     )
