@@ -223,7 +223,7 @@ public class LectureElasticRepositoryImpl implements LectureElasticRepository {
                     if (keyword != null && !keyword.isBlank()) {
                         b.must(m -> m
                                 .multiMatch(mm -> mm
-                                        .fields("lectureNm^3", "tags^2", "professor", "type", "lectureType", "evaluation")
+                                        .fields("lectureName^3", "tags^2", "professor", "type", "lectureType", "evaluation")
                                         .query(keyword)
                                         .operator(Operator.Or)
                                 )
