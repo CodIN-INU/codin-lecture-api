@@ -15,22 +15,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ExceptionResponse> handleException(Exception e) {
-        StackTraceElement[] stack = e.getStackTrace();
-
-        if (stack != null && stack.length > 0) {
-            StackTraceElement stackTraceElement = stack[0];
-
-            log.error("[Exception] 발생 위치: {}.{}({}:{}) | 원인: {} - {}",
-                    stackTraceElement.getClassName(),
-                    stackTraceElement.getMethodName(),
-                    stackTraceElement.getFileName(),
-                    stackTraceElement.getLineNumber(),
-                    e.getClass().getSimpleName(),
-                    e.getMessage(),
-                    e);
-        } else {
-            log.error("[Exception] 원인: {} - {}", e.getClass().getSimpleName(), e.getMessage(), e);
-        }
+        log.error("예상치 못한 오류 발생: {}", e.getMessage(), e);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 내부 오류가 발생했습니다."));
@@ -69,10 +54,10 @@ public class GlobalExceptionHandler {
 
     private void logBasedOnLevel(GlobalErrorCode code, Exception e) {
         String logMessage = "Custom Exception Occurred";
-        Level logLevel = code.logEvent(); // User Gist에서는 logEvent()로 되어있어 getLogLevel()로 수정
+        Level logLevel = code.logEvent();
 
         if (logLevel == Level.ERROR) {
-            log.error(logMessage, e); // ERROR 레벨일 경우 예외 스택 트레이스 전체를 기록
+            log.error(logMessage, e);
         } else if (logLevel == Level.WARN) {
             log.warn(logMessage);
         } else {
