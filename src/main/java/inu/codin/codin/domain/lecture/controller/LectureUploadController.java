@@ -35,6 +35,15 @@ public class LectureUploadController {
 
     }
 
+    @GetMapping(value = "/upload-elasticsearch")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
+    public ResponseEntity<SingleResponse<?>> uploadNewSemesterLecturesToElasticsearch() {
+        lectureUploadService.uploadLecturesToElasticsearch();
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new SingleResponse<>(201, "강의 내역 업로드", null));
+
+    }
+
     @Operation(
             summary = "강의실 현황 엑셀파일 업데이트",
             description = "강의 내역서(엑셀 파일) 이름을 '년도-학기'로 설정하여 업로드 ex) 24-1.xlsx, 24-2.xlsx"
