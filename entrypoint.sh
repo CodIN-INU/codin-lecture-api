@@ -9,13 +9,13 @@ if [ -f "$CERT_FILE" ]; then
     echo "Found certificate at $CERT_FILE. Importing to keystore..."
     
     # 이미 등록된 alias가 있다면 삭제 (재기동 시 오류 방지)
-    keytool -delete -alias elasticsearch -keystore $CACERTS_PATH -storepass $KEYSTORE_PASSWORD -noprompt 2>/dev/null || true
+    keytool -delete -alias elasticsearch -keystore $CACERTS_PATH -storepass changeit -noprompt 2>/dev/null || true
     
     # 인증서 등록
     keytool -importcert -trustcacerts -alias elasticsearch \
         -file $CERT_FILE \
         -keystore $CACERTS_PATH \
-        -storepass $KEYSTORE_PASSWORD -noprompt
+        -storepass changeit -noprompt
         
     echo "Certificate imported successfully."
 else
