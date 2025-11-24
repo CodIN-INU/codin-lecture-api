@@ -10,6 +10,9 @@ spring:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
       password: ${REDIS_PASSWORD}
+    elasticsearch:
+      repositories:
+        enabled: false
   datasource:
     url: ${DATASOURCE_URL}
     username: ${DATASOURCE_USERNAME}
@@ -38,33 +41,12 @@ spring:
         core-size: 2
         max-size: 4
         queue-capacity: 100
-
   elasticsearch:
-    uris: ${ELASTICSEARCH_URL:http://localhost:9200}
-    indices:
-      lectures:
-        settings:
-          analysis:
-            tokenizer:
-              nori_tokenizer:
-                type: nori_tokenizer
-                decompound_mode: mixed
-            filter:
-              nori_readingform:
-                type: nori_readingform
-              autocomplete_filter:
-                type: edge_ngram
-                min_gram: 1
-                max_gram: 20
-            analyzer:
-              nori:
-                type: custom
-                tokenizer: nori_tokenizer
-                filter: [ nori_readingform, lowercase ]
-              nori_autocomplete:
-                type: custom
-                tokenizer: nori_tokenizer
-                filter: [ nori_readingform, autocomplete_filter, lowercase ]
+    username: ${SPRING_ELASTICSEARCH_USERNAME}
+    password: ${SPRING_ELASTICSEARCH_PASSWORD}
+    uris: ${SPRING_ELASTICSEARCH_URIS}
+
+caPath: ${CA_PATH}
 
 lecture:
   python:
