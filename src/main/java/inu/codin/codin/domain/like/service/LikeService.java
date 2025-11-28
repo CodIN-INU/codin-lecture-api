@@ -3,7 +3,7 @@ package inu.codin.codin.domain.like.service;
 import inu.codin.codin.domain.lecture.entity.Lecture;
 import inu.codin.codin.domain.lecture.exception.LectureErrorCode;
 import inu.codin.codin.domain.lecture.exception.LectureException;
-import inu.codin.codin.domain.lecture.repository.LectureRepository;
+import inu.codin.codin.domain.lecture.repository.jpa.LectureRepository;
 import inu.codin.codin.domain.like.controller.LikeFeignClient;
 import inu.codin.codin.domain.like.dto.LikeRequestDto;
 import inu.codin.codin.domain.like.dto.LikeResponseType;

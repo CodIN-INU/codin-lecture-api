@@ -1,8 +1,8 @@
-package inu.codin.codin.domain.elasticsearch.document;
+package inu.codin.codin.domain.lecture.document;
 
-import inu.codin.codin.domain.elasticsearch.document.dto.EmotionInfo;
-import inu.codin.codin.domain.elasticsearch.document.dto.ScheduleInfo;
-import inu.codin.codin.domain.elasticsearch.document.dto.SemesterInfo;
+import inu.codin.codin.domain.lecture.document.dto.EmotionInfo;
+import inu.codin.codin.domain.lecture.document.dto.ScheduleInfo;
+import inu.codin.codin.domain.lecture.document.dto.SemesterInfo;
 import lombok.*;
 
 import java.util.List;
