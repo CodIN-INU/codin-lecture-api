@@ -1,4 +1,4 @@
-package inu.codin.codin.global.config;
+package inu.codin.codin.global.infra.elasticsearch;
 
 import co.elastic.clients.elasticsearch.ElasticsearchAsyncClient;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;

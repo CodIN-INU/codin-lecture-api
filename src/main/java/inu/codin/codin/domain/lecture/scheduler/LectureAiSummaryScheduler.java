@@ -1,6 +1,6 @@
 package inu.codin.codin.domain.lecture.scheduler;
 
-import inu.codin.codin.domain.lecture.repository.LectureRepository;
+import inu.codin.codin.domain.lecture.repository.jpa.LectureRepository;
 import inu.codin.codin.domain.lecture.service.LectureSummarizationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,10 +1,10 @@
-package inu.codin.codin.domain.elasticsearch.indexer;
+package inu.codin.codin.domain.lecture.service;
 
-import inu.codin.codin.domain.elasticsearch.convertor.LectureDocumentConverter;
-import inu.codin.codin.domain.elasticsearch.document.LectureDocument;
-import inu.codin.codin.domain.elasticsearch.repository.LectureElasticRepository;
+import inu.codin.codin.domain.lecture.converter.LectureToDocumentConverter;
+import inu.codin.codin.domain.lecture.document.LectureDocument;
+import inu.codin.codin.domain.lecture.repository.elasticsearch.LectureElasticRepository;
 import inu.codin.codin.domain.lecture.entity.Lecture;
-import inu.codin.codin.domain.lecture.repository.LectureRepository;
+import inu.codin.codin.domain.lecture.repository.jpa.LectureRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,10 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class LectureStartupIndexer {
+public class LectureSearchInitializerService {
 
     private final LectureRepository lectureRepository;
-    private final LectureDocumentConverter lectureDocumentConverter;
+    private final LectureToDocumentConverter lectureToDocumentConverter;
     private final LectureElasticRepository lectureElasticRepository;
 
     public void lectureIndex() {
@@ -51,7 +51,7 @@ public class LectureStartupIndexer {
 
         if (!lectures.isEmpty()) {
             List<LectureDocument> documents = lectures.stream()
-                    .map(lectureDocumentConverter::convertToDocument)
+                    .map(lectureToDocumentConverter::convertToDocument)
                     .toList();
 
             lectureElasticRepository.bulkIndexLectures(documents);

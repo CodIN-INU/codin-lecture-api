@@ -1,4 +1,4 @@
-package inu.codin.codin.domain.elasticsearch.document;
+package inu.codin.codin.domain.lecture.repository.elasticsearch;
 
 import co.elastic.clients.elasticsearch._types.analysis.NoriDecompoundMode;
 import co.elastic.clients.elasticsearch._types.mapping.IndexOptions;

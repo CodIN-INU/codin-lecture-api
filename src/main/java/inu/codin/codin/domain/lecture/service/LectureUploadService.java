@@ -1,6 +1,5 @@
 package inu.codin.codin.domain.lecture.service;
 
-import inu.codin.codin.domain.elasticsearch.indexer.LectureStartupIndexer;
 import inu.codin.codin.domain.lecture.dto.MetaMode;
 import inu.codin.codin.domain.lecture.exception.LectureErrorCode;
 import inu.codin.codin.domain.lecture.exception.LectureUploadException;
@@ -28,7 +27,7 @@ public class LectureUploadService {
     @Value("${lecture.python.path}")
     private String PYTHON_DIR;
 
-    private final LectureStartupIndexer indexer;
+    private final LectureSearchInitializerService indexer;
 
     private String ROOM_PROGRAM = "dayTimeOfRoom.py";
     private String LECTURE_PROGRAM = "infoOfLecture.py";

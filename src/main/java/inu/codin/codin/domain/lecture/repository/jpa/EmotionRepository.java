@@ -1,4 +1,4 @@
-package inu.codin.codin.domain.lecture.repository;
+package inu.codin.codin.domain.lecture.repository.jpa;
 
 import inu.codin.codin.domain.lecture.entity.Emotion;
 import org.springframework.data.jpa.repository.JpaRepository;

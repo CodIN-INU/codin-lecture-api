@@ -1,13 +1,14 @@
 package inu.codin.codin.domain.review.service;
 
 
-import inu.codin.codin.domain.elasticsearch.service.LectureElasticService;
+import inu.codin.codin.domain.lecture.service.LectureIndexService;
+import inu.codin.codin.domain.lecture.service.LectureSearchService;
 import inu.codin.codin.domain.lecture.entity.Emotion;
 import inu.codin.codin.domain.lecture.entity.Lecture;
 import inu.codin.codin.domain.lecture.entity.Semester;
 import inu.codin.codin.domain.lecture.exception.LectureErrorCode;
 import inu.codin.codin.domain.lecture.exception.LectureException;
-import inu.codin.codin.domain.lecture.repository.LectureRepository;
+import inu.codin.codin.domain.lecture.repository.jpa.LectureRepository;
 import inu.codin.codin.domain.lecture.service.EmotionService;
 import inu.codin.codin.domain.lecture.service.SemesterService;
 import inu.codin.codin.domain.like.dto.LikeType;
@@ -40,12 +41,13 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final LectureRepository lectureRepository;
-    private final LectureElasticService lectureElasticService;
+    private final LectureSearchService lectureSearchService;
 
     private final EmotionService emotionService;
     private final LikeService likeService;
     private final UserReviewStatsService userReviewStatsService;
     private final SemesterService semesterService;
+    private final LectureIndexService lectureIndexService;
 
 
     /**
@@ -97,7 +99,7 @@ public class ReviewService {
         double avgOfStarRating = reviewRepository.getAvgOfStarRatingByLecture(lecture);
         Emotion emotion = getEmotion(lecture, starRating);
         lecture.updateReviewRating(avgOfStarRating, emotion);
-        lectureElasticService.updateStarRating(lecture.getId(), avgOfStarRating);
+        lectureIndexService.updateStarRating(lecture.getId(), avgOfStarRating);
     }
 
     private Emotion getEmotion(Lecture lecture, double starRating) {

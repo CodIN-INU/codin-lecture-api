@@ -1,6 +1,6 @@
-package inu.codin.codin.domain.elasticsearch.repository;
+package inu.codin.codin.domain.lecture.repository.elasticsearch;
 
-import inu.codin.codin.domain.elasticsearch.document.LectureDocument;
+import inu.codin.codin.domain.lecture.document.LectureDocument;
 import inu.codin.codin.domain.lecture.entity.SortingOption;
 import inu.codin.codin.global.common.entity.Department;
 import org.springframework.data.domain.Page;

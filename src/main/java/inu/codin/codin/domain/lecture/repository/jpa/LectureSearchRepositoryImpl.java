@@ -1,24 +1,17 @@
-package inu.codin.codin.domain.lecture.repository;
+package inu.codin.codin.domain.lecture.repository.jpa;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import inu.codin.codin.domain.elasticsearch.document.LectureDocument;
-import inu.codin.codin.domain.elasticsearch.service.LectureElasticService;
 import inu.codin.codin.domain.lecture.entity.Lecture;
 import inu.codin.codin.domain.lecture.entity.QLecture;
 import inu.codin.codin.domain.lecture.entity.Semester;
-import inu.codin.codin.domain.lecture.entity.SortingOption;
 import inu.codin.codin.domain.lecture.exception.LectureErrorCode;
 import inu.codin.codin.domain.lecture.exception.LectureException;
 import inu.codin.codin.global.common.entity.Department;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,25 +21,6 @@ import java.util.List;
 public class LectureSearchRepositoryImpl implements LectureSearchRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
-    private final LectureElasticService lectureElasticService;
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<LectureDocument> searchLectureList(String keyword, Department department, SortingOption sortingOption, List<String> likeIdList, Pageable pageable, Boolean like) {
-        log.debug("[searchLecturesAtPreview] 강의 조회, keyword={}, department={}, sortingOption={}, liked={}", keyword, department, sortingOption, like);
-        Page<LectureDocument> lectureDocumentPage = lectureElasticService.searchLectureDocumentList(keyword, department, sortingOption, likeIdList, pageable.getPageNumber(), pageable.getPageSize(), like);
-
-        long total = lectureDocumentPage.getTotalElements();
-
-        if (lectureDocumentPage.isEmpty()) {
-            return new PageImpl<>(List.of(), pageable, total);
-        }
-
-        log.info("[searchLecturesAtPreview] 강의 조회, size={} ", lectureDocumentPage.getSize());
-
-        // Page<Lecture> 변환하여 반환
-        return new PageImpl<>(lectureDocumentPage.getContent(), pageable, total);
-    }
 
     @Override
     public List<Lecture> searchLecturesAtReview(Department department, Integer grade, Semester semester) {

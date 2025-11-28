@@ -2,7 +2,7 @@ package inu.codin.codin.domain.lecture.service;
 
 import inu.codin.codin.domain.lecture.dto.LectureRoomResponseDto;
 import inu.codin.codin.domain.lecture.entity.LectureRoom;
-import inu.codin.codin.domain.lecture.repository.LectureRoomRepository;
+import inu.codin.codin.domain.lecture.repository.jpa.LectureRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

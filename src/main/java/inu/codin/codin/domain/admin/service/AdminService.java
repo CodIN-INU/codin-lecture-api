@@ -1,7 +1,7 @@
 package inu.codin.codin.domain.admin.service;
 
-import inu.codin.codin.domain.elasticsearch.indexer.LectureStartupIndexer;
-import inu.codin.codin.domain.lecture.repository.LectureRepository;
+import inu.codin.codin.domain.lecture.service.LectureSearchInitializerService;
+import inu.codin.codin.domain.lecture.repository.jpa.LectureRepository;
 import inu.codin.codin.domain.lecture.service.LectureSummarizationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminService {
 
-    private final LectureStartupIndexer indexer;
+    private final LectureSearchInitializerService indexer;
 
     private final LectureRepository lectureRepository;
     private final LectureSummarizationService lectureSummarizationService;

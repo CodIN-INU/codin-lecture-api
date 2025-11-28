@@ -1,4 +1,4 @@
-package inu.codin.codin.global.config;
+package inu.codin.codin.global.infra.elasticsearch;
 
 import co.elastic.clients.elasticsearch._helpers.bulk.BulkListener;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
