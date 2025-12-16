@@ -1,4 +1,4 @@
-package inu.codin.codin.domain.elasticsearch.document.dto;
+package inu.codin.codin.domain.lecture.search.document.dto;
 
 import inu.codin.codin.domain.lecture.entity.Emotion;
 import lombok.*;

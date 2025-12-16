@@ -1,4 +1,4 @@
-package inu.codin.codin.domain.elasticsearch.repository;
+package inu.codin.codin.domain.lecture.repository.elasticsearch;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._helpers.bulk.BulkIngester;
@@ -9,11 +9,11 @@ import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import co.elastic.clients.elasticsearch.core.search.Hit;
+import co.elastic.clients.elasticsearch.core.search.HitsMetadata;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.json.JsonData;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
-import inu.codin.codin.domain.elasticsearch.document.LectureDocument;
-import inu.codin.codin.domain.elasticsearch.document.LectureIndexMapping;
+import inu.codin.codin.domain.lecture.search.document.LectureDocument;
 import inu.codin.codin.domain.lecture.entity.SortingOption;
 import inu.codin.codin.global.common.entity.Department;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -160,8 +161,11 @@ public class LectureElasticRepositoryImpl implements LectureElasticRepository {
                 .map(Hit::source)
                 .collect(Collectors.toList());
 
+        long totalHits = getTotalHits(response.hits());
+        Pageable pageable = PageRequest.of(pageNumber, size);
+
         // 7. PageImpl 객체로 래핑하여 반환
-        return new PageImpl<>(lectureDocumentList);
+        return new PageImpl<>(lectureDocumentList, pageable, totalHits);
     }
 
     @Override
@@ -285,5 +289,13 @@ public class LectureElasticRepositoryImpl implements LectureElasticRepository {
                     .field(f -> f.field("starRating").order(SortOrder.Desc))
             );
         };
+    }
+
+    private long getTotalHits(HitsMetadata<LectureDocument> hits) {
+        if (hits != null && hits.total() != null) {
+            return hits.total().value();
+        }
+
+        return 0;
     }
 }

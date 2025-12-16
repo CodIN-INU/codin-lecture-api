@@ -3,7 +3,7 @@ package inu.codin.codin.domain.lecture.service;
 import inu.codin.codin.domain.lecture.entity.Semester;
 import inu.codin.codin.domain.lecture.exception.SemesterErrorCode;
 import inu.codin.codin.domain.lecture.exception.SemesterException;
-import inu.codin.codin.domain.lecture.repository.SemesterRepository;
+import inu.codin.codin.domain.lecture.repository.jpa.SemesterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

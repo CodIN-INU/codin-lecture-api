@@ -1,9 +1,9 @@
-package inu.codin.codin.domain.elasticsearch.convertor;
+package inu.codin.codin.domain.lecture.converter;
 
-import inu.codin.codin.domain.elasticsearch.document.LectureDocument;
-import inu.codin.codin.domain.elasticsearch.document.dto.EmotionInfo;
-import inu.codin.codin.domain.elasticsearch.document.dto.ScheduleInfo;
-import inu.codin.codin.domain.elasticsearch.document.dto.SemesterInfo;
+import inu.codin.codin.domain.lecture.search.document.LectureDocument;
+import inu.codin.codin.domain.lecture.search.document.dto.EmotionInfo;
+import inu.codin.codin.domain.lecture.search.document.dto.ScheduleInfo;
+import inu.codin.codin.domain.lecture.search.document.dto.SemesterInfo;
 import inu.codin.codin.domain.lecture.entity.Lecture;
 import inu.codin.codin.domain.lecture.entity.LectureSchedule;
 import inu.codin.codin.domain.lecture.entity.LectureSemester;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class LectureDocumentConverter {
+public class LectureToDocumentConverter {
 
     public LectureDocument convertToDocument(Lecture lecture) {
         return LectureDocument.builder()

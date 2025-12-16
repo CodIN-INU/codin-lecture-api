@@ -35,6 +35,10 @@ public class LectureUploadController {
 
     }
 
+    @Operation(
+            summary = "새 학기의 강의 내역 es에 색인",
+            description = "DB에 저장되어 있는 강의 내역 es에 색인"
+    )
     @GetMapping(value = "/upload-elasticsearch")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
     public ResponseEntity<SingleResponse<?>> uploadNewSemesterLecturesToElasticsearch() {

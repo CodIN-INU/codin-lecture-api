@@ -4,6 +4,7 @@ import inu.codin.codin.domain.lecture.dto.LectureDetailResponseDto;
 import inu.codin.codin.domain.lecture.dto.LecturePageResponse;
 import inu.codin.codin.domain.lecture.dto.LectureSearchListResponseDto;
 import inu.codin.codin.domain.lecture.entity.SortingOption;
+import inu.codin.codin.domain.lecture.service.LectureSearchService;
 import inu.codin.codin.domain.lecture.service.LectureService;
 import inu.codin.codin.global.common.entity.Department;
 import inu.codin.codin.global.common.response.ListResponse;
@@ -25,17 +26,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class LectureController {
 
     private final LectureService lectureService;
+    private final LectureSearchService lectureSearchService;
 
     @Operation(
-            summary = "학과명 및 과목/교수 정렬 페이지",
-            description = "학과명과 검색 키워드(optional), 과목/교수 라디오 토클을 통해 정렬한 리스트 10개씩 반환<br>"+
+            summary = "학과명 및 과목/교수 검색 페이지",
+            description = "학과명과 검색 키워드(optional), 과목/교수 라디오 토클을 통해 검색한 리스트 10개씩 반환<br>"+
                     "department : COMPUTER_SCI, INFO_COMM, EMBEDDED <br>"+
                     "keyword : 검색 키워드 (Optional)"+
                     "sort : RATING(평점 높은 순) , LIKE(좋아요 많은 순), HIT(조회수 많은 순) <br>"+
                     "like : 좋아요한 과목 모아보기 true"
     )
     @GetMapping("/courses")
-    public ResponseEntity<SingleResponse<LecturePageResponse>> sortListOfLectures(
+    public ResponseEntity<SingleResponse<LecturePageResponse>> searchLectures(
             @RequestParam(value = "department", required = false) Department department,
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "sort", required = false) SortingOption sort,
@@ -43,7 +45,7 @@ public class LectureController {
             @RequestParam("page") int page)
     {
         return ResponseEntity.ok().body(new SingleResponse<>(200, "과목 리스트 반환 완료",
-                        lectureService.sortListOfLectures(keyword, department, sort, like, page)));
+                        lectureSearchService.searchLectureDocumentList(keyword, department, sort, page, like)));
     }
 
     @Operation(

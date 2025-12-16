@@ -2,7 +2,7 @@ package inu.codin.codin.domain.lecture.service;
 
 import inu.codin.codin.domain.lecture.entity.Emotion;
 import inu.codin.codin.domain.lecture.entity.Lecture;
-import inu.codin.codin.domain.lecture.repository.EmotionRepository;
+import inu.codin.codin.domain.lecture.repository.jpa.EmotionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
