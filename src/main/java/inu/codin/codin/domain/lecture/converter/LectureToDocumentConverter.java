@@ -1,9 +1,9 @@
 package inu.codin.codin.domain.lecture.converter;
 
-import inu.codin.codin.domain.lecture.document.LectureDocument;
-import inu.codin.codin.domain.lecture.document.dto.EmotionInfo;
-import inu.codin.codin.domain.lecture.document.dto.ScheduleInfo;
-import inu.codin.codin.domain.lecture.document.dto.SemesterInfo;
+import inu.codin.codin.domain.lecture.search.document.LectureDocument;
+import inu.codin.codin.domain.lecture.search.document.dto.EmotionInfo;
+import inu.codin.codin.domain.lecture.search.document.dto.ScheduleInfo;
+import inu.codin.codin.domain.lecture.search.document.dto.SemesterInfo;
 import inu.codin.codin.domain.lecture.entity.Lecture;
 import inu.codin.codin.domain.lecture.entity.LectureSchedule;
 import inu.codin.codin.domain.lecture.entity.LectureSemester;

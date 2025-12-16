@@ -1,6 +1,6 @@
 package inu.codin.codin.domain.lecture.service;
 
-import inu.codin.codin.domain.lecture.document.LectureDocument;
+import inu.codin.codin.domain.lecture.search.document.LectureDocument;
 import inu.codin.codin.domain.lecture.dto.LecturePageResponse;
 import inu.codin.codin.domain.lecture.dto.LecturePreviewResponseDto;
 import inu.codin.codin.domain.lecture.entity.SortingOption;

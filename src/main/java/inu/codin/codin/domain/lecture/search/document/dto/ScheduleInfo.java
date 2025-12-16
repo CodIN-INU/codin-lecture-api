@@ -1,4 +1,4 @@
-package inu.codin.codin.domain.lecture.document.dto;
+package inu.codin.codin.domain.lecture.search.document.dto;
 
 import inu.codin.codin.domain.lecture.entity.LectureSchedule;
 import lombok.*;

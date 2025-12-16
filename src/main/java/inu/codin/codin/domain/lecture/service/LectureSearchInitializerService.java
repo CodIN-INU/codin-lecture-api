@@ -1,7 +1,7 @@
 package inu.codin.codin.domain.lecture.service;
 
 import inu.codin.codin.domain.lecture.converter.LectureToDocumentConverter;
-import inu.codin.codin.domain.lecture.document.LectureDocument;
+import inu.codin.codin.domain.lecture.search.document.LectureDocument;
 import inu.codin.codin.domain.lecture.repository.elasticsearch.LectureElasticRepository;
 import inu.codin.codin.domain.lecture.entity.Lecture;
 import inu.codin.codin.domain.lecture.repository.jpa.LectureRepository;

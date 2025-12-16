@@ -1,6 +1,6 @@
 package inu.codin.codin.domain.lecture.dto;
 
-import inu.codin.codin.domain.lecture.document.LectureDocument;
+import inu.codin.codin.domain.lecture.search.document.LectureDocument;
 import inu.codin.codin.domain.lecture.entity.LectureTag;
 import inu.codin.codin.domain.lecture.entity.Type;
 import io.swagger.v3.oas.annotations.media.Schema;

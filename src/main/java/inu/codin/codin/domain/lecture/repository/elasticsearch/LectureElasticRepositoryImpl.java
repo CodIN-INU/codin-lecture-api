@@ -13,7 +13,7 @@ import co.elastic.clients.elasticsearch.core.search.HitsMetadata;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.json.JsonData;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
-import inu.codin.codin.domain.lecture.document.LectureDocument;
+import inu.codin.codin.domain.lecture.search.document.LectureDocument;
 import inu.codin.codin.domain.lecture.entity.SortingOption;
 import inu.codin.codin.global.common.entity.Department;
 import lombok.RequiredArgsConstructor;
