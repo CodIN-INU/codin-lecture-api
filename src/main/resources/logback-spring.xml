@@ -24,4 +24,16 @@
         <appender-ref ref="STDOUT_JSON"/>
     </root>
 
+    <springProfile name="local, default">
+        <root level="INFO">
+            <appender-ref ref="STDOUT_TEXT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev, prod">
+        <root level="INFO">
+            <appender-ref ref="STDOUT_JSON"/>
+        </root>
+    </springProfile>
+
 </configuration>
