@@ -3,11 +3,15 @@
 
     <springProperty scope="context" name="serviceName" source="spring.application.name" defaultValue="unknown-service"/>
 
+    <appender name="STDOUT_TEXT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan([%X{txId:-NO_TX_ID}]) %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <appender name="STDOUT_JSON" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-
             <customFields>{"service_name":"${serviceName}"}</customFields>
-
             <fieldNames>
                 <timestamp>@timestamp</timestamp>
                 <version>[ignore]</version>
@@ -20,8 +24,16 @@
         </encoder>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT_JSON"/>
-    </root>
+    <springProfile name="local, default">
+        <root level="INFO">
+            <appender-ref ref="STDOUT_TEXT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev, prod">
+        <root level="INFO">
+            <appender-ref ref="STDOUT_JSON"/>
+        </root>
+    </springProfile>
 
 </configuration>

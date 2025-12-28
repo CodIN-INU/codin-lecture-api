@@ -1,5 +1,6 @@
 package inu.codin.codin.global.config;
 
+import inu.codin.codin.global.common.decorator.MdcTaskDecorator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -20,6 +21,7 @@ public class SchedulingConfig {
         executor.setThreadNamePrefix("ai-summary-schedule-");
         executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setAwaitTerminationSeconds(30);
+        executor.setTaskDecorator(new MdcTaskDecorator());
         executor.initialize();
         return executor;
     }
